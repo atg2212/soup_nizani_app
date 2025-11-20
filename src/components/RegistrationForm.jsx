@@ -27,10 +27,15 @@ const RegistrationForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('🚀 Form submission started');
+        console.log('📝 Form data:', formData);
+
         setLoading(true);
         setError('');
 
         try {
+            // Validation
+            console.log('✅ Starting validation...');
             if (!formData.full_name || !formData.phone_number) {
                 throw new Error('נא למלא את כל שדות החובה');
             }
@@ -38,18 +43,33 @@ const RegistrationForm = () => {
             if (formData.is_bringing_soup && (!formData.soup_name || !formData.soup_type)) {
                 throw new Error('נא למלא את פרטי המרק');
             }
+            console.log('✅ Validation passed');
 
-            await addDoc(collection(db, 'volunteers'), {
+            // Prepare data
+            const dataToSave = {
                 ...formData,
                 createdAt: new Date()
-            });
+            };
+            console.log('💾 Data to save:', dataToSave);
+            console.log('🔥 Firebase DB instance:', db);
+            console.log('📚 Collection reference:', collection(db, 'volunteers'));
 
+            // Save to Firestore
+            console.log('⏳ Attempting to save to Firestore...');
+            const docRef = await addDoc(collection(db, 'volunteers'), dataToSave);
+            console.log('✅ Document written with ID:', docRef.id);
+
+            console.log('🎉 Success! Navigating to thank you page...');
             navigate('/thank-you');
         } catch (err) {
-            console.error("Error adding document: ", err);
+            console.error("❌ Error adding document: ", err);
+            console.error("❌ Error code:", err.code);
+            console.error("❌ Error message:", err.message);
+            console.error("❌ Full error:", err);
             setError('אירעה שגיאה בשליחת הטופס. אנא נסה/י שוב. ' + (err.message || ''));
         } finally {
             setLoading(false);
+            console.log('🏁 Form submission completed');
         }
     };
 

@@ -9,18 +9,35 @@ const AdminDashboard = () => {
     const [error, setError] = useState('');
 
     const fetchVolunteers = async () => {
+        console.log('📊 Admin: Starting to fetch volunteers...');
+        console.log('🔥 Firebase DB instance:', db);
+
         try {
+            console.log('📚 Collection reference:', collection(db, 'volunteers'));
+            console.log('⏳ Fetching documents from Firestore...');
+
             const querySnapshot = await getDocs(collection(db, 'volunteers'));
-            const data = querySnapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
+            console.log('✅ Query successful! Documents count:', querySnapshot.size);
+
+            const data = querySnapshot.docs.map(doc => {
+                console.log('📄 Document ID:', doc.id, 'Data:', doc.data());
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                };
+            });
+
+            console.log('✅ All volunteers data:', data);
             setVolunteers(data);
         } catch (err) {
-            console.error("Error fetching volunteers: ", err);
+            console.error("❌ Error fetching volunteers: ", err);
+            console.error("❌ Error code:", err.code);
+            console.error("❌ Error message:", err.message);
+            console.error("❌ Full error:", err);
             setError('שגיאה בטעינת הנתונים. וודא שיש לך הרשאות מתאימות.');
         } finally {
             setLoading(false);
+            console.log('🏁 Fetch volunteers completed');
         }
     };
 
@@ -30,11 +47,15 @@ const AdminDashboard = () => {
 
     const handleDelete = async (id) => {
         if (window.confirm('האם את/ה בטוח/ה שברצונך למחוק מתנדב זה?')) {
+            console.log('🗑️ Admin: Deleting volunteer with ID:', id);
             try {
                 await deleteDoc(doc(db, 'volunteers', id));
+                console.log('✅ Volunteer deleted successfully');
                 setVolunteers(prev => prev.filter(v => v.id !== id));
             } catch (err) {
-                console.error("Error deleting document: ", err);
+                console.error("❌ Error deleting document: ", err);
+                console.error("❌ Error code:", err.code);
+                console.error("❌ Error message:", err.message);
                 alert('שגיאה במחיקת המתנדב');
             }
         }

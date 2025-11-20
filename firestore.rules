@@ -1,0 +1,11 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read and write access to the volunteers collection
+    // This is suitable for a public volunteer registration form
+    match /volunteers/{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
