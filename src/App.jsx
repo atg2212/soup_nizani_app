@@ -6,7 +6,7 @@ import ThankYou from './components/ThankYou';
 
 function App() {
     return (
-        <Router basename="/hanuka_nizanim">
+        <Router>
             <div className="app-container">
                 <Routes>
                     <Route path="/" element={<RegistrationForm />} />
