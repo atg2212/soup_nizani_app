@@ -202,7 +202,7 @@ const RegistrationForm = () => {
                 </form>
 
                 <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-                    <a href="/hanuka_nizanim/admin" style={{ color: '#999', textDecoration: 'none', fontSize: '0.9rem' }}>
+                    <a href="/admin" style={{ color: '#999', textDecoration: 'none', fontSize: '0.9rem' }}>
                         כניסה למנהלים
                     </a>
                 </div>

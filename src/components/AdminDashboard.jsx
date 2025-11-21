@@ -69,7 +69,7 @@ const AdminDashboard = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                     <h1>לוח בקרה - מתנדבים</h1>
                     <div style={{ display: 'flex', gap: '1rem' }}>
-                        <a href="/hanuka_nizanim/" style={{ textDecoration: 'none' }}>
+                        <a href="/" style={{ textDecoration: 'none' }}>
                             <button style={{ background: 'none', border: '1px solid #ccc', padding: '0.5rem', borderRadius: '4px' }}>
                                 חזרה לרישום
                             </button>
@@ -81,6 +81,36 @@ const AdminDashboard = () => {
                 </div>
 
                 {error && <div style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
+
+                <div style={{
+                    display: 'flex',
+                    gap: '2rem',
+                    marginBottom: '2rem',
+                    padding: '1.5rem',
+                    backgroundColor: '#f8f9fa',
+                    borderRadius: '8px',
+                    justifyContent: 'space-around',
+                    flexWrap: 'wrap'
+                }}>
+                    <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2c3e50' }}>
+                            {volunteers.filter(v => v.is_bringing_soup).length}
+                        </div>
+                        <div style={{ color: '#7f8c8d' }}>מרקים</div>
+                    </div>
+                    <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2c3e50' }}>
+                            {volunteers.filter(v => v.can_serve).length}
+                        </div>
+                        <div style={{ color: '#7f8c8d' }}>מגישים</div>
+                    </div>
+                    <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2c3e50' }}>
+                            {volunteers.filter(v => v.can_bring_warming_tray).length}
+                        </div>
+                        <div style={{ color: '#7f8c8d' }}>פלטות</div>
+                    </div>
+                </div>
 
                 <div className="table-container">
                     <table>
