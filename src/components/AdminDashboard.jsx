@@ -54,7 +54,7 @@ const AdminDashboard = () => {
         setDeleteModal({ open: false, id: null, name: '' });
     };
 
-    const headers = ['שם מלא', 'טלפון', 'מביא לביבות?', 'שם הלביבות', 'סוג', 'מגיש?', 'פלטה?', 'תאריך רישום'];
+    const headers = ['שם מלא', 'טלפון', 'מביא לביבות?', 'שם הלביבות', 'סוג', 'מגיש?', 'תאריך רישום'];
 
     const formatVolunteerRow = (v) => {
         let dateStr = '';
@@ -74,7 +74,6 @@ const AdminDashboard = () => {
             v.soup_name || '',
             v.soup_type || '',
             v.can_serve ? 'כן' : 'לא',
-            v.can_bring_warming_tray ? 'כן' : 'לא',
             dateStr
         ];
     };
@@ -250,13 +249,6 @@ const AdminDashboard = () => {
                         </div>
                         <div style={{ color: '#7f8c8d' }}>מגישים</div>
                     </div>
-                    <div style={{ textAlign: 'center', borderBottom: '3px solid #e74c3c', paddingBottom: '0.5rem', minWidth: '100px' }}>
-                        <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>🔥</div>
-                        <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2c3e50' }}>
-                            {volunteers.filter(v => v.can_bring_warming_tray).length}
-                        </div>
-                        <div style={{ color: '#7f8c8d' }}>פלטות</div>
-                    </div>
                 </div>
 
                 <div className="table-container">
@@ -269,14 +261,13 @@ const AdminDashboard = () => {
                                 <th scope="col">שם הלביבות</th>
                                 <th scope="col">סוג</th>
                                 <th scope="col">מגיש?</th>
-                                <th scope="col">פלטה?</th>
                                 <th scope="col">פעולות</th>
                             </tr>
                         </thead>
                         <tbody>
                             {volunteers.length === 0 ? (
                                 <tr>
-                                    <td colSpan="8" style={{ textAlign: 'center', padding: 0, border: 'none' }}>
+                                    <td colSpan="7" style={{ textAlign: 'center', padding: 0, border: 'none' }}>
                                         <div className="empty-state">
                                             <FaClipboardList size={48} style={{ color: '#bdc3c7', marginBottom: '1rem' }} />
                                             <h3 style={{ color: '#7f8c8d', marginBottom: '0.5rem' }}>אין מתנדבים רשומים עדיין</h3>
@@ -293,7 +284,6 @@ const AdminDashboard = () => {
                                         <td data-label="שם הלביבות">{volunteer.soup_name || '-'}</td>
                                         <td data-label="סוג">{volunteer.soup_type || '-'}</td>
                                         <td data-label="מגיש?">{volunteer.can_serve ? 'כן' : 'לא'}</td>
-                                        <td data-label="פלטה?">{volunteer.can_bring_warming_tray ? 'כן' : 'לא'}</td>
                                         <td data-label="פעולות">
                                             <button
                                                 className="btn-danger"

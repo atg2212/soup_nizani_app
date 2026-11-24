@@ -11,8 +11,7 @@ const RegistrationForm = () => {
         is_bringing_soup: false,
         soup_name: '',
         soup_type: '',
-        can_serve: false,
-        can_bring_warming_tray: false
+        can_serve: false
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -211,19 +210,6 @@ const RegistrationForm = () => {
                         />
                         <label htmlFor="can_serve" style={{ marginBottom: 0, marginRight: '0.5rem' }}>
                             מוכן/ה להגיש לביבות באירוע
-                        </label>
-                    </div>
-
-                    <div className="form-group checkbox-group">
-                        <input
-                            type="checkbox"
-                            id="can_bring_warming_tray"
-                            name="can_bring_warming_tray"
-                            checked={formData.can_bring_warming_tray}
-                            onChange={handleChange}
-                        />
-                        <label htmlFor="can_bring_warming_tray" style={{ marginBottom: 0, marginRight: '0.5rem' }}>
-                            יכול/ה להביא פלטת חימום
                         </label>
                     </div>
 
